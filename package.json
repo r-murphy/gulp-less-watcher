@@ -21,19 +21,19 @@
     "prepublish": "npm run clean && npm run build"
   },
   "dependencies": {
-    "accord": "^0.20.1",
+    "accord": "^0.20.3",
     "deepmerge": "^0.2.10",
-    "gaze": "^0.5.1",
-    "gulp-util": "^3.0.6",
-    "less": "^2.5.1",
+    "gaze": "^0.5.2",
+    "gulp-util": "^3.0.7",
+    "less": "^2.5.3",
     "through2": "^2.0.0",
-    "vinyl": "^0.5.0",
-    "vinyl-sourcemaps-apply": "^0.1.4"
+    "vinyl": "^1.1.0",
+    "vinyl-sourcemaps-apply": "^0.2.0"
   },
   "devDependencies": {
-    "babel": "^5.8.19",
+    "babel": "^5.8.23",
     "mkdirp": "^0.5.1",
-    "rimraf": "^2.4.2"
+    "rimraf": "^2.4.3"
   },
   "author": "Cristian Pallarés <me@cpallares.com> (www.cpallares.com)",
   "license": "ISC"

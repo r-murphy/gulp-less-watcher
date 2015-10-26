@@ -1,19 +1,18 @@
 import fs       from 'fs';
-import path     from 'path';
 import accord   from 'accord';
 import File     from 'vinyl';
 import through2 from 'through2';
-import util     from 'gulp-util';
+//import util     from 'gulp-util';
 import merge    from 'deepmerge';
 
 import createError   from './createError';
 import createWatcher from './createWatcher';
 
-const {log} = util;
+//const {log} = util;
 const less  = accord.load('less');
 
 export default (options = {}) => {
-  return through2.obj(function(file, enc, cb) {
+  let throughStream = through2.obj(function(file, enc, cb) {
     if (file.isNull()) {
       return cb(null, file);
     }
@@ -28,21 +27,29 @@ export default (options = {}) => {
     const scan = () => {
       const contents = fs.readFileSync(filename);
       less.render(contents.toString(), merge(options, { filename })).then(({imports}) => {
-
-        this.push(new File({
+        var newFile = new File({
           contents,
-          cwd: file.cwd,
-          base: file.base,
-          path: file.path,
-        }));
+          cwd: process.cwd(),
+          base: process.cwd(),
+          path: file.path
+        });
+        this.push(newFile);
 
         // Filter node_modules imports.
-        imports = imports.filter(filename => !filename.match(/node_modules/));
+        imports = imports.filter(ffilename => !ffilename.match(/node_modules/));
         watch(imports).on('all', scan);
+
+        // cb(null, newFile);
 
       }).catch(err => this.emit('error', createError(err)));
     };
 
     scan();
   });
+
+  throughStream.end = function() {
+    //suppress the end call on the stream
+  };
+
+  return throughStream;
 };
