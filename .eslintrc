@@ -1,0 +1,28 @@
+---
+  env:
+    node: true
+    browser: true
+  parser: "babel-eslint"
+  globals:
+    dummy: true
+    jQuery: true
+    $: true
+  rules:
+
+    #####  errors (2)  #####
+
+    ##### warnings (1) #####
+    comma-dangle: 1
+    key-spacing: 1
+    semi: 1
+
+    ##### disabled (0) #####
+    no-underscore-dangle: 0
+    no-use-before-define: 0
+    no-trailing-spaces: 0
+    no-mixed-requires: 0
+    no-multi-spaces: 0
+    no-process-exit: 0
+    new-cap: 0
+    quotes: 0
+    strict: 0
