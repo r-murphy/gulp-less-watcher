@@ -22,6 +22,8 @@ export default (options = {}) => {
     }
 
     const filename = file.path;
+    const filebase = file.base;
+    const filecwd = file.cwd;
     const watch    = createWatcher(filename);
 
     const scan = () => {
@@ -29,8 +31,8 @@ export default (options = {}) => {
       less.render(contents.toString(), merge(options, { filename })).then(({imports}) => {
         var newFile = new File({
           contents,
-          cwd: process.cwd(),
-          base: process.cwd(),
+          cwd: filecwd,
+          base: filebase,
           path: file.path
         });
         this.push(newFile);
